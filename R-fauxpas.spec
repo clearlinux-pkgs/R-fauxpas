@@ -4,7 +4,7 @@
 #
 Name     : R-fauxpas
 Version  : 0.2.0
-Release  : 7
+Release  : 8
 URL      : https://cran.r-project.org/src/contrib/fauxpas_0.2.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fauxpas_0.2.0.tar.gz
 Summary  : HTTP Error Helpers
@@ -12,21 +12,18 @@ Group    : Development/Tools
 License  : MIT
 Requires: R-crul
 Requires: R-httpcode
-Requires: R-stringi
 Requires: R-whisker
 BuildRequires : R-crul
 BuildRequires : R-httpcode
-BuildRequires : R-stringi
 BuildRequires : R-whisker
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
-error handling, as well as individual methods for every HTTP status
-    code, both via status code numbers as well as their descriptive names.
-    Supports ability to adjust behavior to stop, message or warning.
-    Includes ability to use custom whisker template to have any configuration
-    of status code, short description, and verbose message. Currently 
-    supports integration with 'crul', 'curl', and 'httr'.
+fauxpas
+=======
+[![Build Status](https://travis-ci.org/ropenscilabs/fauxpas.svg)](https://travis-ci.org/ropenscilabs/fauxpas)
+[![cran version](http://www.r-pkg.org/badges/version/fauxpas)](https://cran.r-project.org/package=fauxpas)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fauxpas)](https://github.com/metacran/cranlogs.app)
 
 %prep
 %setup -q -c -n fauxpas
@@ -36,11 +33,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530292070
+export SOURCE_DATE_EPOCH=1552807774
 
 %install
+export SOURCE_DATE_EPOCH=1552807774
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1530292070
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -58,9 +55,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library fauxpas
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library fauxpas
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -75,8 +72,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library fauxpas|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  fauxpas || :
 
 
 %files
@@ -107,3 +103,10 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/fauxpas/help/paths.rds
 /usr/lib64/R/library/fauxpas/html/00Index.html
 /usr/lib64/R/library/fauxpas/html/R.css
+/usr/lib64/R/library/fauxpas/tests/test-all.R
+/usr/lib64/R/library/fauxpas/tests/testthat/cached_teapot.rda
+/usr/lib64/R/library/fauxpas/tests/testthat/test-Error.R
+/usr/lib64/R/library/fauxpas/tests/testthat/test-children.R
+/usr/lib64/R/library/fauxpas/tests/testthat/test-fail-well.R
+/usr/lib64/R/library/fauxpas/tests/testthat/test-http.R
+/usr/lib64/R/library/fauxpas/tests/testthat/test-http_star.R
