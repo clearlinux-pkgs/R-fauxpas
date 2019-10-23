@@ -4,14 +4,13 @@
 #
 Name     : R-fauxpas
 Version  : 0.2.0
-Release  : 14
+Release  : 15
 URL      : https://cran.r-project.org/src/contrib/fauxpas_0.2.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fauxpas_0.2.0.tar.gz
 Summary  : HTTP Error Helpers
 Group    : Development/Tools
 License  : MIT
 Requires: R-R6
-Requires: R-crul
 Requires: R-httpcode
 Requires: R-whisker
 BuildRequires : R-R6
@@ -19,14 +18,14 @@ BuildRequires : R-crul
 BuildRequires : R-httpcode
 BuildRequires : R-whisker
 BuildRequires : buildreq-R
+BuildRequires : util-linux
 
 %description
-error handling, as well as individual methods for every HTTP status
-    code, both via status code numbers as well as their descriptive names.
-    Supports ability to adjust behavior to stop, message or warning.
-    Includes ability to use custom whisker template to have any configuration
-    of status code, short description, and verbose message. Currently 
-    supports integration with 'crul', 'curl', and 'httr'.
+fauxpas
+=======
+[![Build Status](https://travis-ci.org/ropenscilabs/fauxpas.svg)](https://travis-ci.org/ropenscilabs/fauxpas)
+[![cran version](http://www.r-pkg.org/badges/version/fauxpas)](https://cran.r-project.org/package=fauxpas)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fauxpas)](https://github.com/metacran/cranlogs.app)
 
 %prep
 %setup -q -c -n fauxpas
@@ -36,10 +35,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569288226
+export SOURCE_DATE_EPOCH=1571827579
 
 %install
-export SOURCE_DATE_EPOCH=1569288226
+export SOURCE_DATE_EPOCH=1571827579
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
