@@ -4,7 +4,7 @@
 #
 Name     : R-fauxpas
 Version  : 0.5.0
-Release  : 19
+Release  : 20
 URL      : https://cran.r-project.org/src/contrib/fauxpas_0.5.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fauxpas_0.5.0.tar.gz
 Summary  : HTTP Error Helpers
@@ -21,30 +21,31 @@ BuildRequires : R-whisker
 BuildRequires : buildreq-R
 
 %description
-fauxpas
-=======
-[![Build Status](https://travis-ci.org/ropensci/fauxpas.svg)](https://travis-ci.org/ropensci/fauxpas)
-[![cran checks](https://cranchecks.info/badges/worst/fauxpas)](https://cranchecks.info/pkgs/fauxpas)
-[![cran version](http://www.r-pkg.org/badges/version/fauxpas)](https://cran.r-project.org/package=fauxpas)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fauxpas)](https://github.com/metacran/cranlogs.app)
+error handling, as well as individual methods for every HTTP status
+    code, both via status code numbers as well as their descriptive names.
+    Supports ability to adjust behavior to stop, message or warning.
+    Includes ability to use custom whisker template to have any configuration
+    of status code, short description, and verbose message. Currently 
+    supports integration with 'crul', 'curl', and 'httr'.
 
 %prep
 %setup -q -c -n fauxpas
+cd %{_builddir}/fauxpas
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587075960
+export SOURCE_DATE_EPOCH=1589772220
 
 %install
-export SOURCE_DATE_EPOCH=1587075960
+export SOURCE_DATE_EPOCH=1589772220
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
