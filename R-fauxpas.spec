@@ -5,7 +5,7 @@
 #
 Name     : R-fauxpas
 Version  : 0.5.2
-Release  : 44
+Release  : 45
 URL      : https://cran.r-project.org/src/contrib/fauxpas_0.5.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fauxpas_0.5.2.tar.gz
 Summary  : HTTP Error Helpers
